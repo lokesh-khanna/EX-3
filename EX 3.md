@@ -15,34 +15,63 @@ will send NACKsignal to client.
 6. Stop the program
 
 PROGRAM:
+
 CLIENT:
+
 import socket
+
 s=socket.socket()
+
 s.bind(('localhost',8000))
+
 s.listen(5)
+
 c,addr=s.accept()
+
 size=int(input("Enter number of frames to send : "))
+
 l=list(range(size))
+
 s=int(input("Enter Window Size : "))
+
 st=0
+
 i=0
+
 while True:
+ 
  while(i<len(l)):
+ 
  st+=s
+ 
  c.send(str(l[i:st]).encode())
- ack=c.recv(1024).decode()
+
+ack=c.recv(1024).decode()
+ 
  if ack:
- print(ack)
+
+print(ack)
+ 
  i+=s
+
 SERVER:
+
 import socket
+
 s=socket.socket()
+
 s.connect(('localhost',8000))
+
 REG NO:
+
 while True: 
- print(s.recv(1024).decode())
- s.send("acknowledgement recived from the server".encode())
+
+print(s.recv(1024).decode())
+
+s.send("acknowledgement recived from the server".encode())
+
 OUTPUT:
+
 CLIENT:![1bclient](https://github.com/lokesh-khanna/EX-3/assets/119606216/ed010c37-7660-4efa-b767-d50428b85570)
 
 SERVER:![1bserver](https://github.com/lokesh-khanna/EX-3/assets/119606216/4bc3d442-5d2c-432e-bbef-0594e50ab367)
